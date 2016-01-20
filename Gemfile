@@ -46,6 +46,7 @@ group :development do
 
   # have access to RSpec- specific generators, and it includes it in test mode in order to run the tests
   gem 'rspec-rails', '2.9.0'
+  gem 'test-unit'
 end
 
 group :test do
