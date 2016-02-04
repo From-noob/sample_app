@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   # attr_accessible(:name, :email)
   has_secure_password
+  has_many :microposts, dependent: :destroy
   before_save { |user| user.email = email.downcase }
   # An alternate implementation of the before_save callback.
   # before_save { email.downcase! }
@@ -15,6 +16,11 @@ class User < ActiveRecord::Base
 
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+
+  def feed
+    # This is preliminary. See "Following users" for the full implementation.
+    Micropost.where("user_id = ?", id)
+  end
 
   private
 
